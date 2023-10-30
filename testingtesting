@@ -1,0 +1,37 @@
+import os
+
+path = r"/Users/dandmin/Documents/Practice/" ##Change Path
+dirlist = os.listdir(path)
+
+print("Files and directories in '", path, "' :")
+print(dirlist)
+
+ccf = open("Countries.txt", "r")
+
+countriesList = []
+
+for x in ccf:
+    countriesList.append(x.split("\t")[0])
+    if x.split("\t")[1][-1] == "\n":
+        countriesList.append(x.split("\t")[1][:-1])
+    else:
+        countriesList.append(x.split("\t")[1])
+    print("SPLIT")
+
+for fileName in os.listdir(path):
+    if fileName != ".DS_Store":
+        source = path + fileName
+        countryCode = source.split("_")[1]
+        positionType = source.split("_")[2]
+        countryIndex = countriesList.index(countryCode) - 1
+        if positionType == "RSU":
+            destination = path + countriesList[countryIndex] + " - RSU Oct 2023.pdf"
+        elif positionType == "SO":
+            destination = path + countriesList[countryIndex] + " - SOP Oct 2023.pdf"
+        os.rename(source, destination)
+
+print("DONE")
+print("COUNTRY LIST")
+print(countriesList)
+
+ccf.close()
