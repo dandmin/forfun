@@ -19,15 +19,15 @@ for x in ccf:
     print("SPLIT")
 
 for fileName in os.listdir(path):
-    if fileName != ".DS_Store":
+    if (fileName != ".DS_Store") and (fileName.split("_")[0] == "EYMPESTaxPosition"):
         source = path + fileName
         countryCode = source.split("_")[1]
         positionType = source.split("_")[2]
         countryIndex = countriesList.index(countryCode) - 1
         if positionType == "RSU":
-            destination = path + countriesList[countryIndex] + " - RSU Oct 2023.pdf"
+            destination = path + countriesList[countryIndex] + " _ RSU Oct 2023.pdf"
         elif positionType == "SO":
-            destination = path + countriesList[countryIndex] + " - SOP Oct 2023.pdf"
+            destination = path + countriesList[countryIndex] + " _ SOP Oct 2023.pdf"
         os.rename(source, destination)
 
 print("DONE")
